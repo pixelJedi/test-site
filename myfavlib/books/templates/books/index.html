@@ -1,0 +1,30 @@
+{% extends 'books/base.html' %}
+
+{% block title %}
+Главная
+{% endblock %}
+
+{% block header %}
+    Последние книги:
+{% endblock %}
+
+{% block content %}
+    <div class="books-num">
+        Страницы:
+        {% for i in page %}
+            <a href="{% url 'books:index_mod' page=i num=num %}">{{i}}</a>
+        {% endfor %}
+    </div>
+    {% for book in books %}
+        <div class="book-item">
+            <a href="{{book.id}}/detail"/>
+            <div class="book-cover">
+                <img src="{{book.cover.url}}" alt="{{book}} - обложка"/>
+            </div>
+            <p class="book-title-author">{{ book }} - {{book.get_author}}</p>
+            <p class="book-annot">{{ book.get_annot|truncatewords:25 }}</p>
+        </div>
+    {% empty %}
+        <li>Все книги разобрали :(</li>
+    {% endfor %}
+{% endblock %}

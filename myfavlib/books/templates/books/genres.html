@@ -1,0 +1,24 @@
+{% extends 'books/base.html' %}
+
+{% block title %}
+    Жанры
+{% endblock %}
+
+{% block header %}
+    Жанры:
+{% endblock %}
+
+{% block content %}
+    <div id="genre">
+        {% for genre in genres %}
+            <a class="genre-item" href="/books/genre/{{genre.name}}">{{genre.get_name_display}}</a> >>
+            {% for child in genre.get_children %}
+                <a class="genre-item child" href="/books/genre/{{child.name}}">{{child.get_name_display}}</a>
+            {% empty %}
+                :)
+            {% endfor %}<br>
+        {% empty %}
+            Пока пусто!
+        {% endfor %}
+    </div>
+{% endblock %}

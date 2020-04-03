@@ -1,0 +1,31 @@
+{% extends 'books/base.html' %}
+
+{% block header %}
+    {{book.name}}
+{% endblock %}
+
+{% block content %}
+    <div id="grid">
+        <div id="cover">
+            <div class="book-cover">
+              <img src="{{book.cover.url}}" alt="{{book}} - обложка" />
+            </div>
+        </div>
+       <div id="l_author">
+            <h2>Автор:</h2>
+       </div>
+       <div id="author">
+           {{ book.get_author }}
+       </div>
+       <div id="l_genre">
+            <h2>Жанры:</h2>
+       </div>
+       <div id="genre">
+           {% for genre in book.genre.all %}
+           <a class="genre-item" href="/books/genre/{{genre.name}}">{{genre.get_name_display}}</a>
+           {% empty %}
+                Все книги разобрали :(
+           {% endfor %}
+       </div>
+    </div>
+{% endblock %}

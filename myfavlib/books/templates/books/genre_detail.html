@@ -1,0 +1,17 @@
+{% extends 'books/base.html' %}
+
+{% block title %}
+    {{genre}}
+{% endblock %}
+
+{% block header %}
+Книги в жанре {{genre}}
+{% endblock %}
+
+{% block content %}
+    {% for book in genre.get_books %}
+        <a href="/books/{{book.id}}/detail"><li>{{ book }}</li></a>
+    {% empty %}
+        Пока не завезли!
+    {% endfor %}
+{% endblock %}
